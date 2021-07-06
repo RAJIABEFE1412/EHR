@@ -29,11 +29,11 @@ const server = http.createServer(app);
 
 // const base58 = require('bs58');
 app.get("/", (req, res) => {
-    res.sendStatus(200);
+
     res.json({
         status: 200,
         message: "Welcome to Doctor Mine"
-    });
+    }); res.sendStatus(200);
 });
 
 app.post('/adduser', jsonParser, (req, res) => {
@@ -77,7 +77,7 @@ app.post('/addHistory', jsonParser, (req, res) => {
 
     bc.addnewAsset(historyData, 1);
     // let prevhash = bc.lastBlock() ? bc.lastBlock().hash : null;
-    bc.addnewBlock( 1, res);
+    bc.addnewBlock(1, res);
 
 
 
