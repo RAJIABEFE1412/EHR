@@ -4,6 +4,7 @@
   "description": "This is the backend for my EHR project. it servers as an api to the frontend written in flutter",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
