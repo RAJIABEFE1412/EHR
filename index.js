@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
     res.json({
         status: 200,
         message: "Welcome to Doctor Mine"
-    }); res.sendStatus(200);
+    // }); res.sendStatus(200);
 });
 
 app.post('/adduser', jsonParser, (req, res) => {
