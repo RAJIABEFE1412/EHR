@@ -8,6 +8,7 @@ let historyModel = require("./database/history")
 const TARGET_HASH = hash(1560);
 
 const chalk = require("chalk");
+const { json } = require('express');
 
 class MedicalBC {
     constructor() {
@@ -111,6 +112,51 @@ class MedicalBC {
                 return callback(block);
             });
         }
+    }
+
+    getBlock(hash, cases, res) {
+
+        if (cases == 0) {
+            // userModel
+            console.log("hash --", hash);
+            blockchainModel.findOne({ hash: hash }, null, { sort: { _id: -1 }, limit: 1 }, (err, block) => {
+
+                if (err)
+                    return res.json({
+                        status: 400,
+                        message: err
+                    });
+                console.log('data --', block);
+                return res.json({
+                    status: 200,
+                    data: block
+                });
+
+            });
+        } else if (cases == 1) {
+            // history model
+            historyModel.findOne({ hash: hash }, null, { sort: { _id: -1 }, limit: 1 }, (err, block) => {
+
+                if (err)
+                    return res.json({
+                        status: 400,
+                        message: err
+                    });
+                return res.json({
+                    status: 200,
+                    data: block
+                });
+
+            });
+        }
+    }
+
+    getLoginBlock(email, pwd, callback) {
+
+
+        // userModel
+
+        blockchainModel.findOne({ 'asset.email': email, 'asset.password': hash(pwd) }, null, {}, callback);
     }
 }
 

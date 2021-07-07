@@ -5,21 +5,12 @@ const db = require('./blockchain/database');
 const chalk = require("chalk");
 const blockChain = require('./blockchain/block_chain');
 const bodyParser = require('body-parser');
-
+const bc = new blockChain();
 var jsonParser = bodyParser.json()
 db.onConnect(() => {
 
     console.log(chalk.green("database connected"));
-    // const blockChain = require('./blockchain/block_chain');
-    // const validator = require('./blockchain/validator');
-    // const bc = new blockChain();
 
-
-    // bc.addnewAsset('alex', 'Femi', 5000000);
-    // let prevhash = bc.lastBlock() ? bc.lastBlock().hash : null;
-    // bc.addnewBlock(prevhash);
-
-    // console.log('chain: ', bc.chain);
 });
 
 
@@ -33,7 +24,7 @@ app.get("/", (req, res) => {
     res.json({
         status: 200,
         message: "Welcome to Doctor Mine"
-    }); 
+    });
     // res.sendStatus(200);
 });
 
@@ -48,7 +39,7 @@ app.post('/adduser', jsonParser, (req, res) => {
         gender: req.body.gender
     };
 
-    const bc = new blockChain();
+
 
     bc.addnewAsset(userData, 0);
     // let prevhash = bc.lastBlock() ? bc.lastBlock().hash : null;
@@ -63,7 +54,6 @@ app.post('/adduser', jsonParser, (req, res) => {
 // history add new disease
 
 app.post('/addHistory', jsonParser, (req, res) => {
-    console.log('received: ', req.body)
     let historyData = {
 
         sicknessName: req.body.sicknessName,
@@ -73,11 +63,8 @@ app.post('/addHistory', jsonParser, (req, res) => {
 
     };
 
-
-    const bc = new blockChain();
-
     bc.addnewAsset(historyData, 1);
-    // let prevhash = bc.lastBlock() ? bc.lastBlock().hash : null;
+
     bc.addnewBlock(1, res);
 
 
@@ -95,7 +82,7 @@ app.post('/getOtp', (req, res) => {
 
     const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets: false });
 
-    request.sendMail("base36.rr@gmail.com", otp).then((gotten) => {
+    request.sendMail(req.body.email, otp).then((gotten) => {
         console.log("gotten", gotten);
         res.json({
             status: 200,
@@ -107,6 +94,53 @@ app.post('/getOtp', (req, res) => {
 
 
 })
+
+// get user
+
+app.get('/getUser', (req, res) => {
+
+    bc.getBlock(req.query.hash, 0, res);
+})
+
+
+app.post('/login', (req, res) => {
+
+    bc.getLoginBlock(req.body.email, req.body.pwd, (err, block) => {
+
+        if (err)
+            return res.json({
+                status: 400,
+                message: err
+            });
+        if (!block.asset.twoFactorAuth) {
+            var request = require('./email/otp_email');
+            var otpGenerator = require('otp-generator')
+
+            const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets: false });
+
+            request.sendMail(block.asset.email, otp).then((gotten) => {
+
+                return res.json({
+                    status: 200,
+                    message: "Otp sent sucessfully",
+
+                    data: {
+                        otp: otp,
+                        block: block
+                    }
+
+                });
+            });
+
+        } else
+            return res.json({
+                status: 200,
+                message: "User found!",
+                data: { block: block }
+            });
+
+    });
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
