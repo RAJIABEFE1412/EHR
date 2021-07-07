@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
     // res.sendStatus(200);
 });
 
-app.post('/adduser', jsonParser, (req, res) => {
+app.post('auth/adduser', jsonParser, (req, res) => {
     console.log('received: ', req.body)
     let userData = {
 
@@ -75,7 +75,7 @@ app.post('/addHistory', jsonParser, (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/getOtp', (req, res) => {
+app.post('auth/getOtp', (req, res) => {
     //
     var request = require('./email/otp_email');
     var otpGenerator = require('otp-generator')
@@ -97,13 +97,13 @@ app.post('/getOtp', (req, res) => {
 
 // get user
 
-app.get('/getUser', (req, res) => {
+app.get('profile/getUser', (req, res) => {
 
     bc.getBlock(req.query.hash, 0, res);
 })
 
 
-app.post('/login', (req, res) => {
+app.post('auth/login', (req, res) => {
 
     bc.getLoginBlock(req.body.email, req.body.pwd, (err, block) => {
 
