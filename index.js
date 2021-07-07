@@ -113,6 +113,13 @@ app.post('/auth/login', (req, res) => {
                 status: 400,
                 message: err
             });
+        console.log("block --- ", block, err)
+        if(block == null){
+            return res.json({
+                status: 400,
+                message: "Username / password not correct."
+            });
+        }
         if (block.asset.twoFactorAuth) {
             var request = require('./email/otp_email');
             var otpGenerator = require('otp-generator')

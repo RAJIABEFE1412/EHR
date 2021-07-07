@@ -155,8 +155,8 @@ class MedicalBC {
 
 
         // userModel
-
-        blockchainModel.findOne({ 'asset.email': email, 'asset.password': hash(pwd) }, null, {}, callback);
+        let key = hash(pwd);
+        blockchainModel.findOne({ 'asset.email': email, 'asset.password': key }, null, {}, callback);
     }
 }
 

@@ -37,6 +37,7 @@ let userChainSchema = new schema({
             unique: true,
         },
         password: {
+            required: true,
             type: schema.Types.String,
         },
         dateOfBirth: {
