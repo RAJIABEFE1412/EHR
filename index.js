@@ -113,7 +113,7 @@ app.post('/auth/login', (req, res) => {
                 status: 400,
                 message: err
             });
-        if (!block.asset.twoFactorAuth) {
+        if (block.asset.twoFactorAuth) {
             var request = require('./email/otp_email');
             var otpGenerator = require('otp-generator')
 
@@ -124,7 +124,6 @@ app.post('/auth/login', (req, res) => {
                 return res.json({
                     status: 200,
                     message: "Otp sent sucessfully",
-
                     data: {
                         otp: otp,
                         block: block
