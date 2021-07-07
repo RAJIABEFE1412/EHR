@@ -33,6 +33,7 @@ app.post('/auth/adduser', jsonParser, (req, res) => {
     let userData = {
 
         fullName: req.body.fullName,
+        phoneNumber: req.body.phoneNumber,
         email: req.body.email,
         password: hash(req.body.pwd),
         dateOfBirth: Date.parse(req.body.dob),
