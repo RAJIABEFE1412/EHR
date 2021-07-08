@@ -13,7 +13,23 @@ db.onConnect(() => {
     console.log(chalk.green("database connected"));
 
 });
+getOtp = (req, res) => {
+    var request = require('./email/otp_email');
+    var otpGenerator = require('otp-generator')
 
+    const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets: false });
+
+    request.sendMail(req.body.email, otp).then((gotten) => {
+        console.log("gotten", gotten);
+        res.json({
+            status: 200,
+            message: "Otp sent sucessfully",
+            otp: otp,
+
+        });
+    });
+
+}
 // server
 const app = express();
 const server = http.createServer(app);
@@ -42,7 +58,6 @@ app.post('/auth/adduser', jsonParser, (req, res) => {
         dateOfBirth: Date.parse(req.body.dob),
         gender: req.body.gender
     };
-
 
 
     bc.addnewAsset(userData, 0);
@@ -79,25 +94,11 @@ app.post('/history/addHistory', jsonParser, (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/auth/getOtp', (req, res) => {
-    //
-    var request = require('./email/otp_email');
-    var otpGenerator = require('otp-generator')
-
-    const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets: false });
-
-    request.sendMail(req.body.email, otp).then((gotten) => {
-        console.log("gotten", gotten);
-        res.json({
-            status: 200,
-            message: "Otp sent sucessfully",
-            otp: otp,
-
-        })
-    })
+app.post('/auth/getOtp', getOtp);
+app.post('/history/getOtp', getOtp);
 
 
-})
+
 
 // get user
 
