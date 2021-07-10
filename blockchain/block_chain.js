@@ -54,13 +54,26 @@ class MedicalBC {
                 newBlock.save((err) => {
                     if (err) {
 
+                        if (cases == 1) {
+                            return {
+                                status: 400,
+                                message: err
+
+                            }
+                        }
                         return callback.json({
                             status: 400,
                             message: err
 
                         });
                     }
-
+                    if (cases == 1) {
+                        return {
+                            status: 200,
+                            message: "History has been successfully added",
+                            hash: block.hash
+                        }
+                    }
                     return callback.json({
                         status: 200,
                         message: "User has been successfully added",

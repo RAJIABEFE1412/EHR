@@ -31,6 +31,10 @@ let userChainSchema = new schema({
             type: schema.Types.String,
 
         },
+        socketId:{
+            required: false,
+            type: schema.Types.String,
+        },
         email: {
             required: true,
             type: schema.Types.String,
