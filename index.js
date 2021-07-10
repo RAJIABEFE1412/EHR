@@ -182,9 +182,9 @@ io.on('connection', socket => {
 
             ]
         }
-        console.log("log some thing please.");
-        console.log("Data--- ",a);
-        io.broadcast.
+        // console.log("log some thing please.");
+        // console.log("Data--- ",a);
+        socket.
             // to(socketId).
             emit('historyResult', a);
 
