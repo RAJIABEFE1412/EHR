@@ -164,7 +164,7 @@ io.on('connection', socket => {
     socket.on('getHistories', msg => {
         // console.log("Are you getting here.....");
         var data =  JSON.stringify(msg)
-        console.log("data.... ",data)
+        console.log("data.... ",data.hash)
 
         var res = bc.getBlock(data.hash, 1);
 
