@@ -163,10 +163,10 @@ io.on('connection', socket => {
 
     socket.on('getHistories', msg => {
         // console.log("Are you getting here.....");
-        var data =  JSON.parse(msg)
-        console.log("data.... ",data.hash)
+        // var data =  JSON.parse(msg)
+        // console.log("data.... ",data)
 
-        var res = bc.getBlock(data.hash, 1);
+        var res = bc.getBlock(msg.hash, 1);
 
         console.log("res. ",res);
 
