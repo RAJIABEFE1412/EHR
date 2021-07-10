@@ -138,14 +138,14 @@ class MedicalBC {
             historyModel.findOne({ hash: hash }, null, { sort: { _id: -1 }, limit: 1 }, (err, block) => {
 
                 if (err)
-                    return res.json({
+                    return {
                         status: 400,
                         message: err
-                    });
-                return res.json({
+                    };
+                return {
                     status: 200,
                     data: block
-                });
+                };
 
             });
         }
