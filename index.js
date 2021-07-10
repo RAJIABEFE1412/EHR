@@ -86,9 +86,6 @@ app.post('/history/addHistory', jsonParser, (req, res) => {
 
     bc.addnewBlock(1, res);
 
-
-
-
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -154,7 +151,8 @@ app.post('/auth/login', (req, res) => {
 });
 
 const io = socketio(server);
-return io.on('connection', socket => {
+
+io.on('connection', socket => {
 
     console.log("connected succefully.");
     socket.on('addHistory', msg => {
