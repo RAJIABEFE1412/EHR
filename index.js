@@ -181,7 +181,7 @@ io.on('connection', socket => {
 
             ]
         }
-
+        console.log("log some thing please.");
         console.log(a);
         io.broadcast.
             // to(socketId).
