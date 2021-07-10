@@ -165,7 +165,7 @@ io.on('connection', socket => {
         // console.log("Are you getting here.....");
         var data =  JSON.stringify(msg)
 
-        var res = bc.getBlock(data, 1);
+        var res = bc.getBlock(data.hash, 1);
 
         console.log("res. ",res);
 
