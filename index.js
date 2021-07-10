@@ -162,6 +162,7 @@ io.on('connection', socket => {
     });
 
     socket.on('getHistories', msg => {
+        console.log("Are you getting here.....");
 
         const a = {
             data: [
