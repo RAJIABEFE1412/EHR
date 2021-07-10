@@ -154,7 +154,7 @@ const io = socketio(server);
 
 io.on('connection', socket => {
 
-    console.log("connected succefully.");
+
     socket.on('addHistory', msg => {
         const user = getCurrentUser(socket.id);
 
@@ -164,7 +164,7 @@ io.on('connection', socket => {
     socket.on('getHistories', msg => {
         console.log("Are you getting here.....");
 
-        const a = {
+        var a = {
             data: [
                 { a: 1 },
                 { a: 2 },
@@ -183,10 +183,10 @@ io.on('connection', socket => {
             ]
         }
         console.log("log some thing please.");
-        console.log(a);
+        console.log("Data--- ",a);
         io.broadcast.
             // to(socketId).
-            emit(a);
+            emit('historyResult', a);
 
     });
 
