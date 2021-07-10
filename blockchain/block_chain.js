@@ -136,6 +136,7 @@ class MedicalBC {
         } else if (cases == 1) {
             // history model
             historyModel.findOne({ hash: hash }, null, { sort: { _id: -1 }, limit: 1 }, (err, block) => {
+                console.log("data blocks", block, err);
 
                 if (err)
                     return {
