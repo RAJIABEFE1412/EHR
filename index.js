@@ -147,6 +147,7 @@ io.on('connection', socket => {
         let historyData = {
             sicknessName: msg.name,
             diagnoses: msg.diagonsis,
+            illnesstype: msg.type,
             userHash: msg.hash,
             doctorHash: msg.doctorHash,
             medication: msg.medication
