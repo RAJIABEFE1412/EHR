@@ -85,6 +85,8 @@ class MedicalBC {
                 this.asset = [];
 
                 if (cases == 1) {
+
+                    console.log("hmmm oga oo---")
                     return a;
                 } else {
 
