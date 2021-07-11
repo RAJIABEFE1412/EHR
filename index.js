@@ -72,22 +72,6 @@ app.post('/auth/adduser', jsonParser, (req, res) => {
 
 // history add new disease
 
-app.post('/history/addHistory', jsonParser, (req, res) => {
-    let historyData = {
-
-        sicknessName: req.body.sicknessName,
-        diagnoses: req.body.diagnoses,
-        userHash: req.body.userHash,
-        doctorHash: req.body.doctorHash,
-
-    };
-
-    bc.addnewAsset(historyData, 1);
-
-    bc.addnewBlock(1, res);
-
-});
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -158,21 +142,34 @@ io.on('connection', socket => {
     socket.on('addHistory', msg => {
         // const user = getCurrentUser(socket.id);
 
-        console.log("data.... ",msg)
+        console.log("data.... ", msg)
 
+        let historyData = {
+            sicknessName: msg.name,
+            diagnoses: msg.diagonsis,
+            userHash: msg.hash,
+            doctorHash: msg.doctorHash,
+            medication: msg.medication
+        };
+
+        bc.addnewAsset(historyData, 1);
+        var res = bc.addnewBlock(1, res);
+        console.log("result ---- ", res);
+        socket.
+            emit('historyResult', res);
         // io.to(user.room).emit('message', msg);
     });
 
     socket.on('getHistories', msg => {
         // console.log("Are you getting here.....");
         // var data =  JSON.parse(msg)
-        console.log("data.... ",msg.hash)
+        console.log("data.... ", msg.hash)
 
         var res = bc.getBlock(msg.hash, 1);
 
-        console.log("res. ",res);
+        console.log("res. ", res);
 
-    
+
         socket.
             // to(socketId).
             emit('historyResult', res);
