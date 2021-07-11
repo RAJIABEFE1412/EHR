@@ -53,7 +53,7 @@ class MedicalBC {
 
                 newBlock.save((err) => {
                     if (err) {
-
+console.log("hmmm err- ",err);
                         if (cases == 1) {
                             return {
                                 status: 400,
@@ -68,6 +68,7 @@ class MedicalBC {
                         });
                     }
                     if (cases == 1) {
+                        console.log("done...")
                         return {
                             status: 200,
                             message: "History has been successfully added",
