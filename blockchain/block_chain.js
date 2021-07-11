@@ -55,11 +55,11 @@ class MedicalBC {
                     if (err) {
 
                         if (cases == 1) {
-                            return {
+                           return cases. emit({
                                 status: 400,
                                 message: err
 
-                            }
+                            });
                         }
                         return callback.json({
                             status: 400,
@@ -69,11 +69,11 @@ class MedicalBC {
                     }
                     if (cases == 1) {
                         console.log("done...")
-                        return {
+                        return cases. emit('historyResult', {
                             status: 200,
                             message: "History has been successfully added",
                             hash: block.hash
-                        }
+                        });
                     }
                     return callback.json({
                         status: 200,
@@ -162,14 +162,14 @@ class MedicalBC {
                 console.log("data blocks", block, err);
 
                 if (err)
-                    return {
+                    return cases.emit("historyResult",{
                         status: 400,
                         message: err
-                    };
-                return {
+                    });
+                return cases.emit("historyResult",{
                     status: 200,
                     data: block
-                };
+                });
 
             });
         }

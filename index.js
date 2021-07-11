@@ -154,10 +154,10 @@ io.on('connection', socket => {
         };
 
         bc.addnewAsset(historyData, 1);
-        var res = bc.addnewBlock(1);
+        var res = bc.addnewBlock(1, socket);
         console.log("result ---- ", res);
-        socket.
-            emit('historyResult', res);
+       
+           
         // io.to(user.room).emit('message', msg);
     });
 
