@@ -34,7 +34,7 @@ class MedicalBC {
             block.hash = hash(block);
             console.log("cases -- ", cases);
             // get last block
-            this.getlastBlock(cases, (lastBlck,) => {
+           return this.getlastBlock(cases, (lastBlck,) => {
                 // check if we have a valid block
                 if (lastBlck) {
                     block.previoushash = lastBlck.hash;
@@ -51,7 +51,7 @@ class MedicalBC {
 
                 console.log("newBlock --", newBlock);
 
-                newBlock.save((err) => {
+                return newBlock.save((err) => {
                     this.chain.push(block);
                     this.asset = [];
                     if (err) {
