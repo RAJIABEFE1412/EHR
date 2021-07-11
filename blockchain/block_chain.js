@@ -52,8 +52,10 @@ class MedicalBC {
                 console.log("newBlock --", newBlock);
 
                 newBlock.save((err) => {
+                    this.chain.push(block);
+                    this.asset = [];
                     if (err) {
-console.log("hmmm err- ",err);
+
                         if (cases == 1) {
                             return {
                                 status: 400,
@@ -81,9 +83,7 @@ console.log("hmmm err- ",err);
                         hash: block.hash
                     })
                 });
-                this.chain.push(block);
-                this.asset = [];
-                return block;
+               
             });
 
 
