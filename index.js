@@ -156,7 +156,9 @@ io.on('connection', socket => {
 
 
     socket.on('addHistory', msg => {
-        const user = getCurrentUser(socket.id);
+        // const user = getCurrentUser(socket.id);
+
+        console.log("data.... ",msg.hash)
 
         io.to(user.room).emit('message', msg);
     });
