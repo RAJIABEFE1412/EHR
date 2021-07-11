@@ -153,7 +153,7 @@ io.on('connection', socket => {
         };
 
         bc.addnewAsset(historyData, 1);
-        var res = bc.addnewBlock(1, res);
+        var res = bc.addnewBlock(1);
         console.log("result ---- ", res);
         socket.
             emit('historyResult', res);
