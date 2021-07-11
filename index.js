@@ -166,14 +166,14 @@ io.on('connection', socket => {
         // var data =  JSON.parse(msg)
         console.log("data.... ", msg.hash)
 
-        var res = bc.getBlock(msg.hash, 1);
+        var res = bc.getBlock(msg.hash, 1, socket);
 
         console.log("res. ", res);
 
 
-        socket.
-            // to(socketId).
-            emit('historyResult', res);
+        // socket.
+        //     // to(socketId).
+        //     emit('historyResult', res);
 
     });
 
