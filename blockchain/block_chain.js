@@ -55,7 +55,7 @@ class MedicalBC {
                     if (err) {
 
                         if (cases == 1) {
-                           return cases. emit({
+                           return callback. emit({
                                 status: 400,
                                 message: err
 
@@ -69,7 +69,7 @@ class MedicalBC {
                     }
                     if (cases == 1) {
                         console.log("done...")
-                        return cases. emit('historyResult', {
+                        return callback. emit('historyResult', {
                             status: 200,
                             message: "History has been successfully added",
                             hash: block.hash
@@ -162,11 +162,11 @@ class MedicalBC {
                 console.log("data blocks", block, err);
 
                 if (err)
-                    return cases.emit("historyResult",{
+                    return res.emit("historyResult",{
                         status: 400,
                         message: err
                     });
-                return cases.emit("historyResult",{
+                return res.emit("historyResult",{
                     status: 200,
                     data: block
                 });
