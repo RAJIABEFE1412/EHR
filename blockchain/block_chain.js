@@ -158,7 +158,7 @@ class MedicalBC {
             });
         } else if (cases == 1) {
             // history model
-            historyModel.findOne({ "asset.userHash": hash }, null, { sort: { _id: -1 }, limit: 1 }, (err, block) => {
+            historyModel.findOne({ "asset.userHash": hash }, null, { }, (err, block) => {
                 console.log("data blocks", block, err);
 
                 if (err)
