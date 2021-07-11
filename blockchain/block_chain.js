@@ -86,7 +86,7 @@ class MedicalBC {
 
                 if (cases == 1) {
 
-                    console.log("hmmm oga oo---")
+                    console.log("hmmm oga oo--- ",a)
                     return a;
                 } else {
 
