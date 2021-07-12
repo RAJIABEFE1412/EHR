@@ -3,33 +3,28 @@ const nodemailer = require("nodemailer");
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main(email, otp) {
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
-  let testAccount = await nodemailer.createTestAccount();
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    let testAccount = await nodemailer.createTestAccount();
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    // port: 587,
-    // secure: false,
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    auth: {
-      user: 'base36.rr@gmail.com',
-      pass: 'Abolarinwa1412'
-    },// true for 465, false for other ports
-    // auth: {
-    //   user: 'roberto.zboncak88@ethereal.email',
-    //   pass: 'qcAufJ9Dn3NwXq2yxh'
-    // },
-  });
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'roberto.zboncak88@ethereal.email',
+            pass: 'qcAufJ9Dn3NwXq2yxh'
+        },
+    });
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: 'Doctor Mine" <base36.rr@gmail.com>', // sender address
-    to: email, // list of receivers
-    subject: "OTP Secure✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+        from: 'Fred Foo 👻" <foo@example.com>', // sender address
+        to: email, // list of receivers
+        subject: "OTP Secure✔", // Subject line
+        text: "Hello world?", // plain text body
+        html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
         <div style="margin:50px auto;width:70%;padding:20px 0">
           <div style="border-bottom:1px solid #eee">
             <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Doctor Mine</a>
@@ -46,14 +41,14 @@ async function main(email, otp) {
           </div>
         </div>
       </div> ` , // html body
-  });
+    });
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
 module.exports.sendMail = main;
