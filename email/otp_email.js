@@ -25,7 +25,7 @@ async function main(email, otp) {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: 'Fred Foo 👻" <foo@example.com>', // sender address
+    from: 'Doctor Mine" <base36.rr@gmail.com>', // sender address
     to: email, // list of receivers
     subject: "OTP Secure✔", // Subject line
     text: "Hello world?", // plain text body
