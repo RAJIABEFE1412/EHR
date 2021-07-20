@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 app.get("/flight", scanner);
 
 
-scanner = (req,res)=>{
+scanner = (reqs,res)=>{
     const http = require("https");
 
 const options = {
