@@ -47,40 +47,6 @@ app.get("/", (req, res) => {
     // res.sendStatus(200);
 });
 
-app.get("/flight", scanner);
-
-
-scanner = (reqs,res)=>{
-    const http = require("https");
-
-const options = {
-	"method": "GET",
-	"hostname": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-	"port": null,
-	"path": "/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=Stockholm",
-	"headers": {
-		"x-rapidapi-key": "f5218838femshe51a23331ce0c44p1febabjsn2f107ec1832e",
-		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-		"useQueryString": true
-	}
-};
-
-const req = http.request(options, function (res) {
-	const chunks = [];
-
-	res.on("data", function (chunk) {
-		chunks.push(chunk);
-	});
-
-	res.on("end", function () {
-		const body = Buffer.concat(chunks);
-		console.log(body.toString());
-        return res.send(body);
-	});
-});
-
-req.end();
-}
 
 app.post('/auth/adduser', jsonParser, (req, res) => {
     console.log('received: ', req.body)
@@ -191,8 +157,8 @@ io.on('connection', socket => {
         bc.addnewAsset(historyData, 1);
         var res = bc.addnewBlock(1, socket);
         console.log("result ---- ", res);
-       
-           
+
+
         // io.to(user.room).emit('message', msg);
     });
 
